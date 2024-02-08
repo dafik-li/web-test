@@ -1,4 +1,4 @@
-package com.solvd.webtest.components;
+package com.solvd.webtest.components.login;
 
 import com.solvd.webtest.domain.User;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;

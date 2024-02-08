@@ -5,14 +5,21 @@
 
     <test name="Login Test" parallel="methods" thread-count="1">
         <classes>
-            <class name="com.solvd.webtest.LoginTest"></class>
+            <class name="com.solvd.webtest.LoginTest"/>
         </classes>
     </test>
 
     <test name="Product Test" parallel="methods" thread-count="1">
         <classes>
-            <class name="com.solvd.webtest.ProductTest"></class>
+            <class name="com.solvd.webtest.ProductTest"/>
         </classes>
     </test>
+
+    <test name="Cart Test" parallel="methods" thread-count="1">
+        <classes>
+            <class name="com.solvd.webtest.CartTest"/>
+        </classes>
+    </test>
+
 
 </suite>

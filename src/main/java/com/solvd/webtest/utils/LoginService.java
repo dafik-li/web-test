@@ -1,6 +1,6 @@
 package com.solvd.webtest.utils;
 
-import com.solvd.webtest.components.LoginModal;
+import com.solvd.webtest.components.login.LoginModal;
 import com.solvd.webtest.domain.User;
 import com.solvd.webtest.domain.Users;
 import com.solvd.webtest.page.HomePage;

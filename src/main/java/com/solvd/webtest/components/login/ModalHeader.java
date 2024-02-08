@@ -1,4 +1,4 @@
-package com.solvd.webtest.components;
+package com.solvd.webtest.components.login;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;

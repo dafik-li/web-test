@@ -1,4 +1,4 @@
-package com.solvd.webtest.components;
+package com.solvd.webtest.components.login;
 
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;

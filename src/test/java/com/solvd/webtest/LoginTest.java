@@ -1,9 +1,9 @@
 package com.solvd.webtest;
 
-import com.solvd.webtest.components.LoginModal;
-import com.solvd.webtest.components.ModalBody;
-import com.solvd.webtest.components.ModalFooter;
-import com.solvd.webtest.components.ModalHeader;
+import com.solvd.webtest.components.login.LoginModal;
+import com.solvd.webtest.components.login.ModalBody;
+import com.solvd.webtest.components.login.ModalFooter;
+import com.solvd.webtest.components.login.ModalHeader;
 import com.solvd.webtest.domain.Users;
 import com.solvd.webtest.page.HomePage;
 import com.solvd.webtest.utils.LoginService;

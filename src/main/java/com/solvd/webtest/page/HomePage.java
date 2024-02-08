@@ -1,7 +1,7 @@
 package com.solvd.webtest.page;
 
-import com.solvd.webtest.components.ProductCard;
-import com.solvd.webtest.components.LoginModal;
+import com.solvd.webtest.components.login.LoginModal;
+import com.solvd.webtest.domain.Product;
 import com.zebrunner.carina.utils.config.Configuration;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends AbstractPage {
+
 
     @FindBy(xpath = "//a[@id = 'login2']")
     private ExtendedWebElement loginLink;
@@ -26,14 +27,23 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//a[@id = 'logout2']")
     private ExtendedWebElement logoutLink;
 
-    @FindBy(xpath = "//div[@class = 'card h-100']")
-    private ProductCard productCard;
+    @FindBy(xpath = "//a[@href = 'prod.html?idp_=1']/img[@src = 'imgs/galaxy_s6.jpg']")
+    private ExtendedWebElement imageLink;
+
+    @FindBy(xpath = "//h4[@class = 'card-title'][%d]")
+    private ExtendedWebElement headlineLinkByIndex;
+
+    @FindBy(xpath = "//div[@class = 'card-block']/h5[%d]")
+    private ExtendedWebElement priceByIndex;
+
+    @FindBy(xpath = "//p[@id = 'article'][%d]")
+    private ExtendedWebElement descriptionByIndex;
+
 
     public HomePage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_URL);
     }
-
     public ExtendedWebElement getLoginLink() {
         return loginLink;
     }
@@ -49,10 +59,18 @@ public class HomePage extends AbstractPage {
     public ExtendedWebElement getLogoutLink() {
         return logoutLink;
     }
-    public ProductCard getProductCard() {
-        return productCard;
+    public ExtendedWebElement getImageLink() {
+        return imageLink;
     }
-
+    public ExtendedWebElement getHeadlineLinkByIndex() {
+        return headlineLinkByIndex;
+    }
+    public ExtendedWebElement getPriceByIndex() {
+        return priceByIndex;
+    }
+    public ExtendedWebElement getDescriptionByIndex() {
+        return descriptionByIndex;
+    }
     public LoginModal clickLoginLink() {
         getLoginLink().click();
         return getLoginModal();
@@ -61,8 +79,24 @@ public class HomePage extends AbstractPage {
         getLogoutLink().click();
         return new HomePage(driver);
     }
+    public ProductPage clickImageLink() {
+        getImageLink().click();
+        return new ProductPage(getDriver());
+    }
+    public ProductPage headlineLinkByIndex(int index) {
+        getHeadlineLinkByIndex().format(index).click();
+        return new ProductPage(getDriver());
+    }
+    public Product getProductByIndex(int index) {
+        Product product = new Product();
+        product.setModel(getHeadlineLinkByIndex().format(index).getText());
+        product.setInformation(getDescriptionByIndex().format(index).getText());
+        String cost = getPriceByIndex().format(index).getText().replace("$", "");
+        product.setCost(Double.parseDouble(cost));
+        return product;
+    }
     @Override
     public void open() {
-       super.openURL(Configuration.getRequired("home_url"));
+        super.openURL(Configuration.getRequired("home_url"));
     }
 }
