@@ -9,20 +9,21 @@ import org.openqa.selenium.support.FindBy;
 
 public class ModalBody extends AbstractUIObject {
 
+
     @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-body']//label[@for = 'log-name']")
-    ExtendedWebElement logUsername;
+    private ExtendedWebElement logUsername;
 
     @FindBy(xpath = "//input[@id = 'loginusername']")
-    ExtendedWebElement inputUsername;
+    private ExtendedWebElement inputUsername;
 
     @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-body']//label[@for = 'log-pass']")
-    ExtendedWebElement logPass;
+    private ExtendedWebElement logPass;
 
     @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-body']//label[@id = 'errorl']")
-    ExtendedWebElement invalidPass;
+    private ExtendedWebElement invalidPass;
 
     @FindBy(xpath = "//input[@id = 'loginpassword']")
-    ExtendedWebElement inputPass;
+    private ExtendedWebElement inputPass;
 
 
     public ModalBody(WebDriver driver, SearchContext searchContext) {

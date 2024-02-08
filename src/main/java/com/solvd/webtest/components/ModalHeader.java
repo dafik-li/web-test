@@ -9,10 +9,10 @@ import org.openqa.selenium.support.FindBy;
 public class ModalHeader extends AbstractUIObject {
 
     @FindBy(xpath = "//h5[@id = 'logInModalLabel']")
-    ExtendedWebElement loginTitle;
+    private ExtendedWebElement loginTitle;
 
     @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-header']//button[@class = 'close']")
-    ExtendedWebElement buttonClose;
+    private ExtendedWebElement buttonClose;
 
 
     public ModalHeader(WebDriver driver, SearchContext searchContext) {

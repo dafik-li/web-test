@@ -17,12 +17,9 @@ public class LoginModal extends AbstractUIObject {
     private ModalFooter modalFooter;
 
 
-
     public LoginModal(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
-
-
 
     public ModalHeader getModalHeader() {
         return modalHeader;
@@ -33,4 +30,5 @@ public class LoginModal extends AbstractUIObject {
     public ModalFooter getModalFooter() {
         return modalFooter;
     }
+
 }

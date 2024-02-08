@@ -10,11 +10,10 @@ import org.openqa.selenium.support.FindBy;
 public class ModalFooter extends AbstractUIObject {
 
     @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-footer']//button[contains(text(), 'Close')]")
-    ExtendedWebElement buttonClose;
+    private ExtendedWebElement buttonClose;
 
-    @FindBy(xpath = "//button[@onclick = 'send()']")
-    ExtendedWebElement buttonLogin;
-
+    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-footer']//button[contains(text(), 'Log in')]")
+    private ExtendedWebElement buttonLogin;
 
     public ModalFooter(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -31,10 +30,10 @@ public class ModalFooter extends AbstractUIObject {
 
     public HomePage clickLogin() {
         buttonLogin.click();
-        return new HomePage(getDriver());
+        return new HomePage(driver);
     }
     public HomePage clickClose() {
         buttonClose.click();
-        return new HomePage(getDriver());
+        return new HomePage(driver);
     }
 }

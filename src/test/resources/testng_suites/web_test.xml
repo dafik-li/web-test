@@ -3,9 +3,15 @@
 
 <suite name="Web suite" verbose="1" parallel="tests" thread-count="1">
 
-    <test name="Web Test" parallel="methods" thread-count="1">
+    <test name="Login Test" parallel="methods" thread-count="1">
         <classes>
-            <class name="com.solvd.webtest.WebTest"></class>
+            <class name="com.solvd.webtest.LoginTest"></class>
+        </classes>
+    </test>
+
+    <test name="Product Test" parallel="methods" thread-count="1">
+        <classes>
+            <class name="com.solvd.webtest.ProductTest"></class>
         </classes>
     </test>
 
