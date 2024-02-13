@@ -35,7 +35,6 @@ public class ProductPage extends AbstractPage {
     public ExtendedWebElement getImage() {
         return image;
     }
-
     public ExtendedWebElement getHeadline() {
         return headline;
     }

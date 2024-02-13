@@ -36,6 +36,13 @@ public class CartTest extends AbstractTest {
         sa.assertTrue(productNumbers.size() == 2, "not 2 products in cart");
         sa.assertEquals(productNumbers.get(0), firstProduct, "products in cart are not equals");
         sa.assertEquals(productNumbers.get(1), secondProduct, "products in cart are not equals");
+        String totalSum = String.valueOf(firstProduct.getCost() + secondProduct.getCost());
+        sa.assertEquals(cartPage.getTotalSum().getText(), totalSum, "total sum is not equals to sum of the products");
+
+        String deletedProduct = cartPage.clickOnDeleteProductByIndexLink(1);
+        sa.assertTrue(productNumbers.size() == 1, String.format("%s has not been deleted", deletedProduct));
+        sa.assertEquals(deletedProduct, productNumbers.get(0), "was deleted wrong product");
+        sa.assertEquals(cartPage.getTotalSum().getText(), totalSum, "total sum is not equals to sum of the products");
 
         sa.assertAll();
     }

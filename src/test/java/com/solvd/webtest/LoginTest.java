@@ -9,12 +9,14 @@ import com.solvd.webtest.page.HomePage;
 import com.solvd.webtest.utils.LoginService;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class LoginTest extends AbstractTest {
 
     private final LoginService loginService = new LoginService();
+
 
     @Test(description = "verify login with valid data")
     public void verifyValidLoginTest() {
