@@ -28,7 +28,9 @@ public class LoginTest extends AbstractTest {
         sa.assertTrue(homePage.getLoginLink().isElementPresent(), "login link is not present");
         sa.assertTrue(homePage.getSignUpLink().isElementPresent(), "sign up link is not present");
         sa.assertTrue(homePage.getNameOfUserLink().isElementNotPresent(1), "name of user link is present");
+        sa.assertFalse(homePage.getNameOfUserLink().isDisplayed(), "name of user link is displayed");
         sa.assertTrue(homePage.getLogoutLink().isElementNotPresent(1), "logout link is present");
+        sa.assertFalse(homePage.getLogoutLink().isDisplayed(), "logout link is displayed");
 
         LoginModal loginModal = homePage.clickLoginLink();
         sa.assertTrue(loginModal.isUIObjectPresent(), "login modal is not present");
@@ -51,10 +53,14 @@ public class LoginTest extends AbstractTest {
         sa.assertTrue(modalFooter.getButtonLogin().isElementPresent(), "button login is not present");
 
         loginService.login(loginService.createUser(Users.VALID), loginModal);
-        sa.assertTrue(homePage.getLogoutLink().isElementPresent(), "logout link is not present");
         sa.assertTrue(homePage.getNameOfUserLink().isElementWithTextPresent("Welcome " + R.TESTDATA.get("valid.username")), "name of user link is not present");
+        sa.assertTrue(homePage.getNameOfUserLink().isDisplayed(), "name of user link is not displayed");
         sa.assertTrue(homePage.getLoginLink().isElementNotPresent(1), "login link is present");
+        sa.assertFalse(homePage.getLoginLink().isDisplayed(), "login link is displayed");
         sa.assertTrue(homePage.getSignUpLink().isElementNotPresent(1), "sign up link is present");
+        sa.assertFalse(homePage.getSignUpLink().isDisplayed(), "sign up link is displayed");
+        sa.assertTrue(homePage.getLogoutLink().isElementPresent(), "logout link is not present");
+        sa.assertTrue(homePage.getLogoutLink().isDisplayed(), "logout link is not displayed");
 
         sa.assertAll();
     }

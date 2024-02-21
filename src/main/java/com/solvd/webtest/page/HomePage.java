@@ -11,32 +11,31 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends AbstractPage {
 
-
-    @FindBy(xpath = "//a[@id = 'login2']")
+    @FindBy(xpath = "//nav[@id = 'narvbarx']//div[@id = 'navbarExample']//ul//li//a[@id = 'login2']")
     private ExtendedWebElement loginLink;
 
     @FindBy(xpath = "//div[@id = 'logInModal']")
     private LoginModal loginModal;
 
-    @FindBy(xpath = "//a[@id = 'signin2']")
+    @FindBy(xpath = "//nav[@id = 'narvbarx']//div[@id = 'navbarExample']//ul//li//a[@id = 'signin2']")
     private ExtendedWebElement signUpLink;
 
-    @FindBy(xpath = "//a[@id = 'nameofuser']")
+    @FindBy(xpath = "//nav[@id = 'narvbarx']//div[@id = 'navbarExample']//ul//li//a[@id = 'nameofuser']")
     private ExtendedWebElement nameOfUserLink;
 
-    @FindBy(xpath = "//a[@id = 'logout2']")
+    @FindBy(xpath = "//nav[@id = 'narvbarx']//div[@id = 'navbarExample']//ul//li//a[@id = 'logout2']")
     private ExtendedWebElement logoutLink;
-
-    @FindBy(xpath = "//a[@href = 'prod.html?idp_=1']/img[@src = 'imgs/galaxy_s6.jpg']")
+    //div[@id= 'tbodyid']//a[@href= 'prod.html?idp_=1']//img[@src = 'imgs/galaxy_s6.jpg']
+    @FindBy(xpath = "//div[@id= 'tbodyid']//a[%d]//img[%d]")
     private ExtendedWebElement imageLink;
 
     @FindBy(xpath = "//h4[@class = 'card-title'][%d]")
     private ExtendedWebElement headlineLinkByIndex;
 
-    @FindBy(xpath = "//div[@class = 'card-block']/h5[%d]")
+    @FindBy(xpath = "//div[@id= 'tbodyid']//div[@class = 'card-block']//h5[%d]")
     private ExtendedWebElement priceByIndex;
 
-    @FindBy(xpath = "//p[@id = 'article'][%d]")
+    @FindBy(xpath = "//div[@id= 'tbodyid']//div[@class = 'card-block']//p[@id = 'article'][%d]")
     private ExtendedWebElement descriptionByIndex;
 
 

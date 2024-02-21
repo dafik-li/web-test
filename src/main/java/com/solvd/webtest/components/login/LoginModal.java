@@ -7,13 +7,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginModal extends AbstractUIObject {
 
-    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-header']")
+    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-dialog']//div[@class = 'modal-header']")
     private ModalHeader modalHeader;
 
-    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-body']")
+    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-dialog']//div[@class = 'modal-body']")
     private ModalBody modalBody;
 
-    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-footer']")
+    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-dialog']//div[@class = 'modal-footer']")
     private ModalFooter modalFooter;
 
 
