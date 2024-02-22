@@ -2,6 +2,7 @@ package com.solvd.webtest.page;
 
 import com.solvd.webtest.components.login.LoginModal;
 import com.solvd.webtest.domain.Product;
+import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.utils.config.Configuration;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
@@ -10,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends AbstractPage {
-
 
     @FindBy(xpath = "//a[@id = 'login2']")
     private ExtendedWebElement loginLink;
@@ -27,16 +27,16 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//a[@id = 'logout2']")
     private ExtendedWebElement logoutLink;
 
-    @FindBy(xpath = "//a[@href = 'prod.html?idp_=1']/img[@src = 'imgs/galaxy_s6.jpg']")
+    @FindBy(xpath = "//div[@class = 'card h-100']/a")
     private ExtendedWebElement imageLink;
 
-    @FindBy(xpath = "//h4[@class = 'card-title'][%d]")
+    @FindBy(xpath = "//div[div[@class = 'card h-100']/div[@class = 'card-block']/h4/a[@class = 'hrefch']][%d]")
     private ExtendedWebElement headlineLinkByIndex;
 
-    @FindBy(xpath = "//div[@class = 'card-block']/h5[%d]")
+    @FindBy(xpath = "//div/div[@class = 'card h-100']/div[@class = 'card-block']/h5")
     private ExtendedWebElement priceByIndex;
 
-    @FindBy(xpath = "//p[@id = 'article'][%d]")
+    @FindBy(xpath = "//div[div[@class = 'card h-100']/div[@class = 'card-block']/p[@id = 'article']][%d]")
     private ExtendedWebElement descriptionByIndex;
 
 
@@ -44,54 +44,57 @@ public class HomePage extends AbstractPage {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_URL);
     }
-    public ExtendedWebElement getLoginLink() {
-        return loginLink;
+
+    public boolean isLoginLinkPresent() {
+        return loginLink.isElementPresent();
     }
-    public LoginModal getLoginModal() {
+    public boolean isLoginLinkDisplayed() {
+        return loginLink.isDisplayed();
+    }
+    public boolean isSignUpLinkPresent() {
+        return signUpLink.isElementPresent();
+    }
+    public boolean isSignUpLinkDisplayed() {
+        return signUpLink.isDisplayed();
+    }
+    public boolean isNameOfUserLinkPresent() {
+        return nameOfUserLink.isElementPresent();
+    }
+    public boolean isNameOfUserLinkPresentWithText() {
+        return nameOfUserLink.isElementWithTextPresent("Welcome " + R.TESTDATA.get("valid.username"));
+    }
+    public boolean isNameOfUserLinkDisplayed() {
+        return nameOfUserLink.isDisplayed();
+    }
+    public boolean isLogoutLinkPresent() {
+        return logoutLink.isElementPresent();
+    }
+    public boolean isLogoutLinkDisplayed() {
+        return logoutLink.isDisplayed();
+    }
+
+
+    public LoginModal clickLoginLink() {
+        loginLink.click();
         return loginModal;
     }
-    public ExtendedWebElement getSignUpLink() {
-        return signUpLink;
-    }
-    public ExtendedWebElement getNameOfUserLink() {
-        return nameOfUserLink;
-    }
-    public ExtendedWebElement getLogoutLink() {
-        return logoutLink;
-    }
-    public ExtendedWebElement getImageLink() {
-        return imageLink;
-    }
-    public ExtendedWebElement getHeadlineLinkByIndex() {
-        return headlineLinkByIndex;
-    }
-    public ExtendedWebElement getPriceByIndex() {
-        return priceByIndex;
-    }
-    public ExtendedWebElement getDescriptionByIndex() {
-        return descriptionByIndex;
-    }
-    public LoginModal clickLoginLink() {
-        getLoginLink().click();
-        return getLoginModal();
-    }
     public HomePage clickLogoutLink() {
-        getLogoutLink().click();
+        loginLink.click();
         return new HomePage(driver);
     }
     public ProductPage clickImageLink() {
-        getImageLink().click();
+        imageLink.click();
         return new ProductPage(getDriver());
     }
-    public ProductPage headlineLinkByIndex(int index) {
-        getHeadlineLinkByIndex().format(index).click();
+    public ProductPage clickOnProductLinkByIndex(int index) {
+        headlineLinkByIndex.format(index).click();
         return new ProductPage(getDriver());
     }
     public Product getProductByIndex(int index) {
         Product product = new Product();
-        product.setModel(getHeadlineLinkByIndex().format(index).getText());
-        product.setInformation(getDescriptionByIndex().format(index).getText());
-        String cost = getPriceByIndex().format(index).getText().replace("$", "");
+        product.setModel(headlineLinkByIndex.format(index).getText());
+        product.setInformation(descriptionByIndex.format(index).getText());
+        String cost = priceByIndex.format(index).getText().replace("$", "");
         product.setCost(Double.parseDouble(cost));
         return product;
     }

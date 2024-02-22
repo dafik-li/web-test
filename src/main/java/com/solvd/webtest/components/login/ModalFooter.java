@@ -12,19 +12,18 @@ public class ModalFooter extends AbstractUIObject {
     @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-footer']//button[contains(text(), 'Close')]")
     private ExtendedWebElement buttonClose;
 
-    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-footer']//button[contains(text(), 'Log in')]")
+    @FindBy(xpath = "//button[contains(text(), 'Log in')]")
     private ExtendedWebElement buttonLogin;
 
     public ModalFooter(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-
-    public ExtendedWebElement getButtonClose() {
-        return buttonClose;
+    public boolean isButtonClosePresent() {
+        return buttonClose.isElementPresent();
     }
-    public ExtendedWebElement getButtonLogin() {
-        return buttonLogin;
+    public boolean isButtonLoginPresent() {
+        return buttonLogin.isElementPresent();
     }
 
 

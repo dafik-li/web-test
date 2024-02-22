@@ -19,14 +19,14 @@ public class CartTest extends AbstractTest {
         homePage.open();
         sa.assertTrue(homePage.isPageOpened(), "homepage is not opened");
 
-        ProductPage firstProductPage = homePage.headlineLinkByIndex(1);
+        ProductPage firstProductPage = homePage.clickOnProductLinkByIndex(1);
         sa.assertTrue(firstProductPage.isPageOpened(), "product page is not opened");
         Product firstProduct = firstProductPage.clickOnAddToCartButton();
 
         firstProductPage.clickOnToHomePageLink();
 
         sa.assertTrue(homePage.isPageOpened(), "homepage is not opened");
-        ProductPage secondProductPage = homePage.headlineLinkByIndex(1);
+        ProductPage secondProductPage = homePage.clickOnProductLinkByIndex(1);
         sa.assertTrue(secondProductPage.isPageOpened(), "product page is not opened");
         Product secondProduct = secondProductPage.clickOnAddToCartButton();
 

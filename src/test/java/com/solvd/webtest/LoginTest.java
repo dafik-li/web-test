@@ -8,8 +8,7 @@ import com.solvd.webtest.domain.Users;
 import com.solvd.webtest.page.HomePage;
 import com.solvd.webtest.utils.LoginService;
 import com.zebrunner.carina.core.AbstractTest;
-import com.zebrunner.carina.utils.R;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,44 +16,47 @@ public class LoginTest extends AbstractTest {
 
     private final LoginService loginService = new LoginService();
 
-
     @Test(description = "verify login with valid data")
     public void verifyValidLoginTest() {
         SoftAssert sa = new SoftAssert();
-        HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-        sa.assertTrue(homePage.isPageOpened(), "page is not opened");
+        HomePage homePage = getHomePage();
 
-        sa.assertTrue(homePage.getLoginLink().isElementPresent(), "login link is not present");
-        sa.assertTrue(homePage.getSignUpLink().isElementPresent(), "sign up link is not present");
-        sa.assertTrue(homePage.getNameOfUserLink().isElementNotPresent(1), "name of user link is present");
-        sa.assertTrue(homePage.getLogoutLink().isElementNotPresent(1), "logout link is present");
+        sa.assertTrue(homePage.isLoginLinkPresent(), "login link is not present");
+        sa.assertTrue(homePage.isSignUpLinkPresent(), "sign up link is not present");
+        sa.assertFalse(homePage.isNameOfUserLinkPresent(), "name of user link is present");
+        sa.assertFalse(homePage.isNameOfUserLinkDisplayed(), "name of user link is displayed");
+        sa.assertFalse(homePage.isLogoutLinkPresent(), "logout link is present");
+        sa.assertFalse(homePage.isLogoutLinkDisplayed(), "logout link is displayed");
 
         LoginModal loginModal = homePage.clickLoginLink();
         sa.assertTrue(loginModal.isUIObjectPresent(), "login modal is not present");
-        sa.assertTrue(loginModal.getModalHeader().isUIObjectPresent(), "header is not present");
-        sa.assertTrue(loginModal.getModalBody().isUIObjectPresent(), "body is not present");
-        sa.assertTrue(loginModal.getModalFooter().isUIObjectPresent(), "footer is not present");
+        sa.assertTrue(loginModal.isModalHeaderUIPresent(), "header is not present");
+        sa.assertTrue(loginModal.isModalBodyUIPresent(), "body is not present");
+        sa.assertTrue(loginModal.isModalFooterUIPresent(), "footer is not present");
 
         ModalHeader modalHeader = loginModal.getModalHeader();
-        sa.assertTrue(modalHeader.getLoginTitle().isElementPresent(), "login title is not present");
-        sa.assertTrue(modalHeader.getButtonClose().isElementPresent(), "button close is not present");
+        sa.assertTrue(modalHeader.isLoginTitlePresent(), "login title is not present");
+        sa.assertTrue(modalHeader.isButtonClosePresent(), "button close is not present");
 
         ModalBody modalBody = loginModal.getModalBody();
-        sa.assertTrue(modalBody.getLogUsername().isElementPresent(), "username title is not present");
-        sa.assertTrue(modalBody.getLogPass().isElementPresent(), "password title is not present");
-        sa.assertTrue(modalBody.getInputUsername().isElementPresent(), "username input field is not present");
-        sa.assertTrue(modalBody.getInputPass().isElementPresent(), "password input field is not present");
+        sa.assertTrue(modalBody.isLogUsernamePresent(), "username title is not present");
+        sa.assertTrue(modalBody.isLogPassPresent(), "password title is not present");
+        sa.assertTrue(modalBody.isInputUsernamePresent(), "username input field is not present");
+        sa.assertTrue(modalBody.isInputPassPresent(), "password input field is not present");
 
         ModalFooter modalFooter = loginModal.getModalFooter();
-        sa.assertTrue(modalFooter.getButtonClose().isElementPresent(), "button close is not present");
-        sa.assertTrue(modalFooter.getButtonLogin().isElementPresent(), "button login is not present");
+        sa.assertTrue(modalFooter.isButtonClosePresent(), "button close is not present");
+        sa.assertTrue(modalFooter.isButtonLoginPresent(), "button login is not present");
 
         loginService.login(loginService.createUser(Users.VALID), loginModal);
-        sa.assertTrue(homePage.getLogoutLink().isElementPresent(), "logout link is not present");
-        sa.assertTrue(homePage.getNameOfUserLink().isElementWithTextPresent("Welcome " + R.TESTDATA.get("valid.username")), "name of user link is not present");
-        sa.assertTrue(homePage.getLoginLink().isElementNotPresent(1), "login link is present");
-        sa.assertTrue(homePage.getSignUpLink().isElementNotPresent(1), "sign up link is present");
+        sa.assertTrue(homePage.isNameOfUserLinkPresentWithText(), "name of user link is not present");
+        sa.assertTrue(homePage.isNameOfUserLinkDisplayed(), "name of user link is not displayed");
+        sa.assertFalse(homePage.isLoginLinkPresent(), "login link is present");
+        sa.assertFalse(homePage.isLoginLinkDisplayed(), "login link is displayed");
+        sa.assertFalse(homePage.isSignUpLinkPresent(), "sign up link is present");
+        sa.assertFalse(homePage.isSignUpLinkDisplayed(), "sign up link is displayed");
+        sa.assertTrue(homePage.isLogoutLinkPresent(), "logout link is not present");
+        sa.assertTrue(homePage.isLogoutLinkDisplayed(), "logout link is not displayed");
 
         sa.assertAll();
     }
@@ -62,34 +64,34 @@ public class LoginTest extends AbstractTest {
     @Test(description = "verify login with invalid data")
     public void verifyInvalidLoginTest() {
         SoftAssert sa = new SoftAssert();
-        HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-        sa.assertTrue(homePage.isPageOpened(), "page is not opened");
+        HomePage homePage = getHomePage();
 
-        sa.assertTrue(homePage.getLoginLink().isElementPresent(), "login link is not present");
-        sa.assertTrue(homePage.getSignUpLink().isElementPresent(), "sign up link is not present");
-        sa.assertTrue(homePage.getNameOfUserLink().isElementNotPresent(1), "name of user link is present");
-        sa.assertTrue(homePage.getLogoutLink().isElementNotPresent(1), "logout link is present");
+        sa.assertTrue(homePage.isLoginLinkPresent(), "login link is not present");
+        sa.assertTrue(homePage.isSignUpLinkPresent(), "sign up link is not present");
+        sa.assertFalse(homePage.isNameOfUserLinkPresent(), "name of user link is present");
+        sa.assertFalse(homePage.isNameOfUserLinkDisplayed(), "name of user link is displayed");
+        sa.assertFalse(homePage.isLogoutLinkPresent(), "logout link is present");
+        sa.assertFalse(homePage.isLogoutLinkDisplayed(), "logout link is displayed");
 
         LoginModal loginModal = homePage.clickLoginLink();
         sa.assertTrue(loginModal.isUIObjectPresent(), "login modal is not present");
-        sa.assertTrue(loginModal.getModalHeader().isUIObjectPresent(), "header is not present");
-        sa.assertTrue(loginModal.getModalBody().isUIObjectPresent(), "body is not present");
-        sa.assertTrue(loginModal.getModalFooter().isUIObjectPresent(), "footer is not present");
+        sa.assertTrue(loginModal.isModalHeaderUIPresent(), "header is not present");
+        sa.assertTrue(loginModal.isModalBodyUIPresent(), "body is not present");
+        sa.assertTrue(loginModal.isModalFooterUIPresent(), "footer is not present");
 
         ModalHeader modalHeader = loginModal.getModalHeader();
-        sa.assertTrue(modalHeader.getLoginTitle().isElementPresent(), "login title is not present");
-        sa.assertTrue(modalHeader.getButtonClose().isElementPresent(), "button close is not present");
+        sa.assertTrue(modalHeader.isLoginTitlePresent(), "login title is not present");
+        sa.assertTrue(modalHeader.isButtonClosePresent(), "button close is not present");
 
         ModalBody modalBody = loginModal.getModalBody();
-        sa.assertTrue(modalBody.getLogUsername().isElementPresent(), "username title is not present");
-        sa.assertTrue(modalBody.getLogPass().isElementPresent(), "password title is not present");
-        sa.assertTrue(modalBody.getInputUsername().isElementPresent(), "username input field is not present");
-        sa.assertTrue(modalBody.getInputPass().isElementPresent(), "password input field is not present");
+        sa.assertTrue(modalBody.isLogUsernamePresent(), "username title is not present");
+        sa.assertTrue(modalBody.isLogPassPresent(), "password title is not present");
+        sa.assertTrue(modalBody.isInputUsernamePresent(), "username input field is not present");
+        sa.assertTrue(modalBody.isInputPassPresent(), "password input field is not present");
 
         ModalFooter modalFooter = loginModal.getModalFooter();
-        sa.assertTrue(modalFooter.getButtonClose().isElementPresent(), "button close is not present");
-        sa.assertTrue(modalFooter.getButtonLogin().isElementPresent(), "button login is not present");
+        sa.assertTrue(modalFooter.isButtonClosePresent(), "button close is not present");
+        sa.assertTrue(modalFooter.isButtonLoginPresent(), "button login is not present");
 
         loginService.login(loginService.createUser(Users.INVALID), loginModal);
 
@@ -99,14 +101,58 @@ public class LoginTest extends AbstractTest {
     @Test(description = "verify logout")
     public void verifyLogoutTest() {
         SoftAssert sa = new SoftAssert();
-        verifyValidLoginTest();
-        HomePage homePage = new HomePage(getDriver());
+        HomePage homePage = getHomePage();
+
+        sa.assertTrue(homePage.isLoginLinkPresent(), "login link is not present");
+        sa.assertTrue(homePage.isSignUpLinkPresent(), "sign up link is not present");
+        sa.assertFalse(homePage.isNameOfUserLinkPresent(), "name of user link is present");
+        sa.assertFalse(homePage.isNameOfUserLinkDisplayed(), "name of user link is displayed");
+        sa.assertFalse(homePage.isLogoutLinkPresent(), "logout link is present");
+        sa.assertFalse(homePage.isLogoutLinkDisplayed(), "logout link is displayed");
+
+        LoginModal loginModal = homePage.clickLoginLink();
+        sa.assertTrue(loginModal.isUIObjectPresent(), "login modal is not present");
+        sa.assertTrue(loginModal.isModalHeaderUIPresent(), "header is not present");
+        sa.assertTrue(loginModal.isModalBodyUIPresent(), "body is not present");
+        sa.assertTrue(loginModal.isModalFooterUIPresent(), "footer is not present");
+
+        ModalHeader modalHeader = loginModal.getModalHeader();
+        sa.assertTrue(modalHeader.isLoginTitlePresent(), "login title is not present");
+        sa.assertTrue(modalHeader.isButtonClosePresent(), "button close is not present");
+
+        ModalBody modalBody = loginModal.getModalBody();
+        sa.assertTrue(modalBody.isLogUsernamePresent(), "username title is not present");
+        sa.assertTrue(modalBody.isLogPassPresent(), "password title is not present");
+        sa.assertTrue(modalBody.isInputUsernamePresent(), "username input field is not present");
+        sa.assertTrue(modalBody.isInputPassPresent(), "password input field is not present");
+
+        ModalFooter modalFooter = loginModal.getModalFooter();
+        sa.assertTrue(modalFooter.isButtonClosePresent(), "button close is not present");
+        sa.assertTrue(modalFooter.isButtonLoginPresent(), "button login is not present");
+
+        loginService.login(loginService.createUser(Users.VALID), loginModal);
+        sa.assertTrue(homePage.isNameOfUserLinkPresentWithText(), "name of user link is not present");
+        sa.assertTrue(homePage.isNameOfUserLinkDisplayed(), "name of user link is not displayed");
+        sa.assertFalse(homePage.isLoginLinkPresent(), "login link is present");
+        sa.assertFalse(homePage.isLoginLinkDisplayed(), "login link is displayed");
+        sa.assertFalse(homePage.isSignUpLinkPresent(), "sign up link is present");
+        sa.assertFalse(homePage.isSignUpLinkDisplayed(), "sign up link is displayed");
+        sa.assertTrue(homePage.isLogoutLinkPresent(), "logout link is not present");
+        sa.assertTrue(homePage.isLogoutLinkDisplayed(), "logout link is not displayed");
+
         homePage.clickLogoutLink();
-        sa.assertTrue(homePage.getLoginLink().isElementPresent(), "");
-        sa.assertTrue(homePage.getSignUpLink().isElementPresent(), "");
-        sa.assertTrue(homePage.getLogoutLink().isElementNotPresent(1), "");
-        sa.assertTrue(homePage.getNameOfUserLink().isElementNotPresent(1), "");
+        sa.assertTrue(homePage.isLoginLinkPresent(), "");
+        sa.assertTrue(homePage.isSignUpLinkPresent(), "");
+        sa.assertFalse(homePage.isLogoutLinkPresent(), "");
+        sa.assertFalse(homePage.isNameOfUserLinkPresent(), "");
 
         sa.assertAll();
+    }
+
+    private HomePage getHomePage() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "page is not opened");
+        return homePage;
     }
 }

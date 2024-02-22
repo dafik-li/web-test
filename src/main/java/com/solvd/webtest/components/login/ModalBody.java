@@ -10,16 +10,16 @@ import org.openqa.selenium.support.FindBy;
 public class ModalBody extends AbstractUIObject {
 
 
-    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-body']//label[@for = 'log-name']")
+    @FindBy(xpath = "//label[@for = 'log-name']")
     private ExtendedWebElement logUsername;
 
     @FindBy(xpath = "//input[@id = 'loginusername']")
     private ExtendedWebElement inputUsername;
 
-    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-body']//label[@for = 'log-pass']")
+    @FindBy(xpath = "//div[@class = 'form-group'][2]//label[@for = 'log-pass']")
     private ExtendedWebElement logPass;
 
-    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-body']//label[@id = 'errorl']")
+    @FindBy(xpath = "//label[@id = 'errorl']")
     private ExtendedWebElement invalidPass;
 
     @FindBy(xpath = "//input[@id = 'loginpassword']")
@@ -30,23 +30,18 @@ public class ModalBody extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-
-    public ExtendedWebElement getLogUsername() {
-        return logUsername;
+    public boolean isLogUsernamePresent() {
+        return logUsername.isElementPresent();
     }
-    public ExtendedWebElement getInputUsername() {
-        return inputUsername;
+    public boolean isLogPassPresent() {
+        return logPass.isElementPresent();
     }
-    public ExtendedWebElement getLogPass() {
-        return logPass;
+    public boolean isInputUsernamePresent() {
+        return inputUsername.isElementPresent();
     }
-    public ExtendedWebElement getInvalidPass() {
-        return invalidPass;
+    public boolean isInputPassPresent() {
+        return inputPass.isElementPresent();
     }
-    public ExtendedWebElement getInputPass() {
-        return inputPass;
-    }
-
 
 
     public ModalBody typeUsername(User user) {

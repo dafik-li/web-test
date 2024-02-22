@@ -31,4 +31,13 @@ public class LoginModal extends AbstractUIObject {
         return modalFooter;
     }
 
+    public boolean isModalHeaderUIPresent() {
+        return modalHeader.isUIObjectPresent();
+    }
+    public boolean isModalBodyUIPresent() {
+        return modalBody.isUIObjectPresent();
+    }
+    public boolean isModalFooterUIPresent() {
+        return modalFooter.isUIObjectPresent();
+    }
 }

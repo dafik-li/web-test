@@ -14,16 +14,14 @@ public class ModalHeader extends AbstractUIObject {
     @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-header']//button[@class = 'close']")
     private ExtendedWebElement buttonClose;
 
-
     public ModalHeader(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-
-    public ExtendedWebElement getLoginTitle() {
-        return loginTitle;
+    public boolean isButtonClosePresent() {
+        return buttonClose.isElementPresent();
     }
-    public ExtendedWebElement getButtonClose() {
-        return buttonClose;
+    public boolean isLoginTitlePresent() {
+        return loginTitle.isElementPresent();
     }
 }

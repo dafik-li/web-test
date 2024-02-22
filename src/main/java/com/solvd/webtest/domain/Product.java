@@ -42,4 +42,13 @@ public class Product {
     public int hashCode() {
         return Objects.hash(getModel(), getCost(), getInformation());
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "model='" + model + '\'' +
+                ", cost=" + cost +
+                ", information='" + information + '\'' +
+                '}';
+    }
 }
