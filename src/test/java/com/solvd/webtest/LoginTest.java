@@ -141,10 +141,12 @@ public class LoginTest extends AbstractTest {
         sa.assertTrue(homePage.isLogoutLinkDisplayed(), "logout link is not displayed");
 
         homePage.clickLogoutLink();
-        sa.assertTrue(homePage.isLoginLinkPresent(), "");
-        sa.assertTrue(homePage.isSignUpLinkPresent(), "");
-        sa.assertFalse(homePage.isLogoutLinkPresent(), "");
-        sa.assertFalse(homePage.isNameOfUserLinkPresent(), "");
+        sa.assertTrue(homePage.isLoginLinkPresent(), "login link is not present");
+        sa.assertTrue(homePage.isSignUpLinkPresent(), "sign up link is not present");
+        sa.assertFalse(homePage.isNameOfUserLinkPresent(), "name of user link is present");
+        sa.assertFalse(homePage.isNameOfUserLinkDisplayed(), "name of user link is displayed");
+        sa.assertFalse(homePage.isLogoutLinkPresent(), "logout link is present");
+        sa.assertFalse(homePage.isLogoutLinkDisplayed(), "logout link is displayed");
 
         sa.assertAll();
     }

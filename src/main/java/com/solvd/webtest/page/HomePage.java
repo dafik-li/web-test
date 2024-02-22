@@ -10,6 +10,10 @@ import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class HomePage extends AbstractPage {
 
     @FindBy(xpath = "//a[@id = 'login2']")
@@ -27,22 +31,36 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//a[@id = 'logout2']")
     private ExtendedWebElement logoutLink;
 
-    @FindBy(xpath = "//div[@class = 'card h-100']/a")
+    @FindBy(xpath = "//a[@class = 'hrefch']")
+    private List<ExtendedWebElement> productsTitles;
+
+    @FindBy(xpath = "//div[div[@class = 'card h-100']/a][%d]")
     private ExtendedWebElement imageLink;
 
-    @FindBy(xpath = "//div[div[@class = 'card h-100']/div[@class = 'card-block']/h4/a[@class = 'hrefch']][%d]")
-    private ExtendedWebElement headlineLinkByIndex;
+    @FindBy(xpath = "//div[div[@class = 'card h-100']/div/h4/a[@class = 'hrefch']][%d]//a[@class = 'hrefch']")
+    private ExtendedWebElement productLinkByIndex;
 
-    @FindBy(xpath = "//div/div[@class = 'card h-100']/div[@class = 'card-block']/h5")
+    @FindBy(xpath = "//div[div[@class = 'card h-100']][%d]//h5")
     private ExtendedWebElement priceByIndex;
 
-    @FindBy(xpath = "//div[div[@class = 'card h-100']/div[@class = 'card-block']/p[@id = 'article']][%d]")
+    @FindBy(xpath = "//div[div[@class = 'card h-100']//p[@id = 'article']][%d]//p[@id = 'article']")
     private ExtendedWebElement descriptionByIndex;
 
 
     public HomePage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_URL);
+    }
+
+    public List<String> getProductsTitles() {
+        List<String> titles = new ArrayList<>();
+        for (ExtendedWebElement title : productsTitles) {
+            titles.add(title.getText());
+        }
+        return titles;
+    }
+    public List<String> getTitles() {
+        return productsTitles.stream().map(ExtendedWebElement::getText).collect(Collectors.toList());
     }
 
     public boolean isLoginLinkPresent() {
@@ -79,20 +97,20 @@ public class HomePage extends AbstractPage {
         return loginModal;
     }
     public HomePage clickLogoutLink() {
-        loginLink.click();
-        return new HomePage(driver);
+        logoutLink.click();
+        return this;
     }
     public ProductPage clickImageLink() {
         imageLink.click();
         return new ProductPage(getDriver());
     }
     public ProductPage clickOnProductLinkByIndex(int index) {
-        headlineLinkByIndex.format(index).click();
+        productLinkByIndex.format(index).click();
         return new ProductPage(getDriver());
     }
     public Product getProductByIndex(int index) {
         Product product = new Product();
-        product.setModel(headlineLinkByIndex.format(index).getText());
+        product.setModel(productLinkByIndex.format(index).getText());
         product.setInformation(descriptionByIndex.format(index).getText());
         String cost = priceByIndex.format(index).getText().replace("$", "");
         product.setCost(Double.parseDouble(cost));

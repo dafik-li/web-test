@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class ProductPage extends AbstractPage {
 
-
     @FindBy(xpath = "//img[@src = 'imgs/galaxy_s6.jpg']")
     private ExtendedWebElement image;
 

@@ -5,15 +5,18 @@ import com.solvd.webtest.page.CartPage;
 import com.solvd.webtest.page.HomePage;
 import com.solvd.webtest.page.ProductPage;
 import com.zebrunner.carina.core.AbstractTest;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
+import java.time.Duration;
 import java.util.List;
 
 public class CartTest extends AbstractTest {
 
     @Test(description = "verify to add/delete product to cart")
     public void verifyCartTest() {
+        WebDriver driver = getDriver();
         SoftAssert sa = new SoftAssert();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -23,12 +26,23 @@ public class CartTest extends AbstractTest {
         sa.assertTrue(firstProductPage.isPageOpened(), "product page is not opened");
         Product firstProduct = firstProductPage.clickOnAddToCartButton();
 
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .pollingEvery(Duration.ofMillis(100))
+                .until(d-> firstProductPage.isAlertPresent());
+        driver.switchTo().alert().accept();
+
+        //driver.navigate().back();
         firstProductPage.clickOnToHomePageLink();
 
         sa.assertTrue(homePage.isPageOpened(), "homepage is not opened");
-        ProductPage secondProductPage = homePage.clickOnProductLinkByIndex(1);
+        ProductPage secondProductPage = homePage.clickOnProductLinkByIndex(2);
         sa.assertTrue(secondProductPage.isPageOpened(), "product page is not opened");
         Product secondProduct = secondProductPage.clickOnAddToCartButton();
+
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .pollingEvery(Duration.ofMillis(100))
+                .until(d-> secondProductPage.isAlertPresent());
+        driver.switchTo().alert().accept();
 
         CartPage cartPage = secondProductPage.clickOnCartLink();
         sa.assertTrue(cartPage.isPageOpened(), "cart page is not opened");

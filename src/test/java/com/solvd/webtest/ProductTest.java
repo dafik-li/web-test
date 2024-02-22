@@ -20,7 +20,6 @@ public class ProductTest extends AbstractTest {
         ProductPage productPage = homePage.clickOnProductLinkByIndex(2);
         sa.assertTrue(productPage.isPageOpened(), "product page is not opened");
 
-
         Product productFromProductPage = productPage.getProduct();
         sa.assertEquals(productFromProductPage, productFromHomePage, "products are not equals");
 

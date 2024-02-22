@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ModalFooter extends AbstractUIObject {
 
-    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-footer']//button[contains(text(), 'Close')]")
+    @FindBy(xpath = ".//button[contains(text(), 'Close')]")
     private ExtendedWebElement buttonClose;
 
     @FindBy(xpath = "//button[contains(text(), 'Log in')]")

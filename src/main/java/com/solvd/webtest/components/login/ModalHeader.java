@@ -11,7 +11,7 @@ public class ModalHeader extends AbstractUIObject {
     @FindBy(xpath = "//h5[@id = 'logInModalLabel']")
     private ExtendedWebElement loginTitle;
 
-    @FindBy(xpath = "//div[@id = 'logInModal']//div[@class = 'modal-header']//button[@class = 'close']")
+    @FindBy(xpath = ".//button[@class = 'close']")
     private ExtendedWebElement buttonClose;
 
     public ModalHeader(WebDriver driver, SearchContext searchContext) {
